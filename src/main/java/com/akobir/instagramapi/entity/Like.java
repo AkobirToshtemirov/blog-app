@@ -13,6 +13,7 @@ import java.util.Date;
 @AllArgsConstructor
 @EqualsAndHashCode
 public class Like {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long likeId;

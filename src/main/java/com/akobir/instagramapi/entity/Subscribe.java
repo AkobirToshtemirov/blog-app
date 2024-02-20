@@ -13,6 +13,7 @@ import java.util.Date;
 @AllArgsConstructor
 @EqualsAndHashCode
 public class Subscribe {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long subscribeId;

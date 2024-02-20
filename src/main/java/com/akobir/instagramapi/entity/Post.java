@@ -13,6 +13,7 @@ import java.util.Date;
 @AllArgsConstructor
 @EqualsAndHashCode
 public class Post {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long postId;
@@ -23,9 +24,6 @@ public class Post {
 
     private String title;
     private String content;
-
-    @Column(name = "media_url")
-    private String mediaUrl;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_at")
