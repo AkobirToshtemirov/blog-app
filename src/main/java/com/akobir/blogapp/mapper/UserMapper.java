@@ -1,21 +1,28 @@
 package com.akobir.blogapp.mapper;
 
+import com.akobir.blogapp.dto.UserCreateDTO;
 import com.akobir.blogapp.dto.UserDTO;
+import com.akobir.blogapp.dto.UserUpdateDTO;
 import com.akobir.blogapp.entity.User;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.MappingTarget;
 import org.mapstruct.factory.Mappers;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface UserMapper {
     UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
 
-    @Mapping(target = "userId", source = "id")
-    UserDTO userToUserDTO(User user);
+    UserDTO toDTO(User user);
 
-    @Mapping(target = "id", source = "userId")
-    User userDTOToUser(UserDTO userDTO);
+    User toEntity(UserDTO userDTO);
 
-    void updateUserFromDTO(UserDTO userDTO, @MappingTarget User user);
+    default void updateUserFromDTO(UserUpdateDTO userDTO, User user) {
+        if (userDTO.username() != null) {
+            user.setUsername(userDTO.username());
+        }
+        if (userDTO.email() != null) {
+            user.setEmail(userDTO.email());
+        }
+    }
+
+    User fromCreateDTO(UserCreateDTO dto);
 }

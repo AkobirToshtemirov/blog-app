@@ -3,7 +3,7 @@ package com.akobir.blogapp.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "subscribes")
@@ -26,7 +26,11 @@ public class Subscribe {
     @JoinColumn(name = "following_user_id")
     private User followingUser;
 
-    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_at")
-    private Date createdAt;
+    private LocalDateTime createdAt;
+
+    @PrePersist
+    protected void onCreate() {
+        createdAt = LocalDateTime.now();
+    }
 }

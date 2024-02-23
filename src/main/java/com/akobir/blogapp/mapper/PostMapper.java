@@ -3,17 +3,18 @@ package com.akobir.blogapp.mapper;
 import com.akobir.blogapp.dto.PostDTO;
 import com.akobir.blogapp.entity.Post;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface PostMapper {
 
     PostMapper INSTANCE = Mappers.getMapper(PostMapper.class);
 
-    @Mapping(target = "postId", source = "id")
-    PostDTO postToPostDTO(Post post);
+//    @Mapping(target = "userId", source = "user.userId")
+//    @Mapping(target = "postId", source = "post.postId")
+    PostDTO toDTO(Post post);
 
-    @Mapping(target = "id", source = "postId")
-    Post postDTOToPost(PostDTO postDTO);
+//    @Mapping(target = "user.userId", source = "postDTO.userId")
+//    @Mapping(target = "postId", source = "postDTO.postId")
+    Post toEntity(PostDTO postDTO);
 }

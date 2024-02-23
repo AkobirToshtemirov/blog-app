@@ -8,14 +8,16 @@ import jakarta.validation.constraints.Size;
  * Data Transfer Object (DTO) representing a request to register a new user.
  */
 public record UserCreateDTO(
-        @NotBlank(message = "Username must not be blank")
-        @Size(min = 3)
+        @NotBlank(message = "Username must not be blank.")
+        @Size(min = 3, message = "Username must be minimum 3 letters!")
         String username,
 
-        @NotBlank(message = "Password must not be blank") @Size(min = 8, message = "Password must be at least 8 characters long")
+        @NotBlank(message = "Password must not be blank")
+        @Size(min = 8, message = "Password must be at least 8 characters long")
         String password,
 
-        @NotBlank(message = "Email must not be blank") @Email(message = "Invalid email format")
+        @NotBlank(message = "Email must not be blank")
+        @Email(message = "Invalid email format")
         String email
 ) {
 }

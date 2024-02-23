@@ -1,12 +1,12 @@
 package com.akobir.blogapp.dto;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public record LikeDTO(
         Long likeId,
         Long userId,
         Long postId,
         boolean liked,
-        Date createdAt
+        LocalDateTime createdAt
 ) {
 }

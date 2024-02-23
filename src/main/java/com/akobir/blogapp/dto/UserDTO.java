@@ -1,10 +1,11 @@
 package com.akobir.blogapp.dto;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public record UserDTO(
         String username,
         String email,
-        Date createdAt
+        LocalDateTime createdAt
 ) {
 }
+
