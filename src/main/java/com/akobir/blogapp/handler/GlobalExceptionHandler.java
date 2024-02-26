@@ -1,10 +1,7 @@
 package com.akobir.blogapp.handler;
 
 import com.akobir.blogapp.dto.ErrorResponseDTO;
-import com.akobir.blogapp.exception.BadRequestException;
-import com.akobir.blogapp.exception.InternalServerErrorException;
-import com.akobir.blogapp.exception.NotFoundException;
-import com.akobir.blogapp.exception.UnauthorizedException;
+import com.akobir.blogapp.exception.*;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -34,7 +31,8 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler({
-            BadRequestException.class
+            BadRequestException.class,
+            DuplicateKeyException.class
     })
     public ResponseEntity<Object> handleBadRequestException(
             RuntimeException ex, WebRequest request) {

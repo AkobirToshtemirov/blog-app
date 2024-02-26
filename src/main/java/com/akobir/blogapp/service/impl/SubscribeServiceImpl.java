@@ -4,7 +4,7 @@ import com.akobir.blogapp.dto.SubscribeCreateDTO;
 import com.akobir.blogapp.dto.SubscribeDTO;
 import com.akobir.blogapp.entity.Subscribe;
 import com.akobir.blogapp.entity.User;
-import com.akobir.blogapp.exception.InternalServerErrorException;
+import com.akobir.blogapp.exception.DuplicateKeyException;
 import com.akobir.blogapp.exception.NotFoundException;
 import com.akobir.blogapp.mapper.SubscribeMapper;
 import com.akobir.blogapp.repository.SubscribeRepository;
@@ -48,16 +48,15 @@ public class SubscribeServiceImpl implements SubscribeService {
         User followerUser = userService.getById(subscribeCreateDTO.followerUserId());
         User followingUser = userService.getById(subscribeCreateDTO.followingUserId());
 
-        try {
-            Subscribe subscription = new Subscribe();
-            subscription.setFollowerUser(followerUser);
-            subscription.setFollowingUser(followingUser);
+        Subscribe subscription = new Subscribe();
+        subscription.setFollowerUser(followerUser);
+        subscription.setFollowingUser(followingUser);
 
+        try {
             subscription = subscribeRepository.save(subscription);
             return subscribeMapper.INSTANCE.toDTO(subscription);
         } catch (DataIntegrityViolationException e) {
-            throw new InternalServerErrorException("Subscription already exists for followerUserId: " +
-                    followerUser.getUserId() + " and followingUserId: " + followingUser.getUserId());
+            throw new DuplicateKeyException("Subscription already exists for the given users.");
         }
     }
 
